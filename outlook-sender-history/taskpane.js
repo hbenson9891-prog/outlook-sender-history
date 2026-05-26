@@ -7,7 +7,7 @@
 
 const CONFIG = {
   // From the Azure app registration (Overview > Application (client) ID)
-  clientId: "ENTER_YOUR_AZURE_APP_CLIENT_ID_HERE",
+  clientId: "3b0c33ce-4b87-4734-9c05-7e23425d583b",
 
   // "common" = work/school + personal accounts.
   // To lock this to your firm only, replace "common" with your Tenant ID.
