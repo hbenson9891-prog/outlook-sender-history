@@ -22,7 +22,7 @@
   <DisplayName DefaultValue="Sender History"/>
   <Description DefaultValue="Shows prior emails from the sender of the currently selected message."/>
   <IconUrl DefaultValue="https://REPLACE-WITH-YOUR-DOMAIN/assets/icon-64.png"/>
-  <HighResolutionIconUrl DefaultValue="https://REPLACE-WITH-YOUR-DOMAIN/assets/icon-128.png"/>
+  <HighResolutionIconUrl DefaultValue="https://hbenson9891-prog.github.io/outlook-sender-history"/>
   <SupportUrl DefaultValue="https://REPLACE-WITH-YOUR-DOMAIN"/>
 
   <!-- Domains the task pane is allowed to talk to -->
