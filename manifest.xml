@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sender History - Outlook add-in manifest
+  ==========================================
+  BEFORE THIS WORKS, do a find-and-replace in THIS file:
+    Replace every  REPLACE-WITH-YOUR-DOMAIN  with the HTTPS host where you
+    put these files, e.g.  myname.github.io/outlook-sender-history
+    (no https:// prefix in the replacement, no trailing slash).
+
+  The Application (client) ID from Azure goes in taskpane.js, NOT here.
+-->
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xsi:type="MailApp">
+
+  <Id>c460be50-f02b-40ec-8035-7e81262393ea</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Hunter Benson</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Sender History"/>
+  <Description DefaultValue="Shows prior emails from the sender of the currently selected message."/>
+  <IconUrl DefaultValue="https://hbenson9891-prog.github.io/outlook-sender-history/assets/icon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://hbenson9891-prog.github.io/outlook-sender-history/assets/icon-128.png"/>
+  <SupportUrl DefaultValue="https://hbenson9891-prog.github.io/outlook-sender-history"/>
+
+  <!-- Domains the task pane is allowed to talk to -->
+  <AppDomains>
+    <AppDomain>https://login.microsoftonline.com</AppDomain>
+    <AppDomain>https://graph.microsoft.com</AppDomain>
+  </AppDomains>
+
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.5"/>
+    </Sets>
+  </Requirements>
+
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://hbenson9891-prog.github.io/outlook-sender-history/taskpane.html"/>
+        <RequestedHeight>450</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+
+  <Permissions>ReadItem</Permissions>
+
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
+
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <!-- Modern ribbon button + pinnable task pane -->
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.5">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
+    </Requirements>
+
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+          <ExtensionPoint xsi:type="MessageReadCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="msgReadGroup">
+                <Label resid="groupLabel"/>
+                <Control xsi:type="Button" id="msgReadOpenPaneButton">
+                  <Label resid="paneButtonLabel"/>
+                  <Supertip>
+                    <Title resid="paneButtonTitle"/>
+                    <Description resid="paneButtonDesc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="icon16"/>
+                    <bt:Image size="32" resid="icon32"/>
+                    <bt:Image size="80" resid="icon80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="taskpaneUrl"/>
+                    <SupportsPinning>true</SupportsPinning>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="icon16" DefaultValue="https://hbenson9891-prog.github.io/outlook-sender-history/assets/icon-16.png"/>
+        <bt:Image id="icon32" DefaultValue="https://hbenson9891-prog.github.io/outlook-sender-history/assets/icon-32.png"/>
+        <bt:Image id="icon80" DefaultValue="https://hbenson9891-prog.github.io/outlook-sender-history/assets/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="taskpaneUrl" DefaultValue="https://hbenson9891-prog.github.io/outlook-sender-history/taskpane.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="groupLabel" DefaultValue="Sender History"/>
+        <bt:String id="paneButtonLabel" DefaultValue="Sender History"/>
+        <bt:String id="paneButtonTitle" DefaultValue="Sender History"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="paneButtonDesc" DefaultValue="Show prior emails from this sender."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
